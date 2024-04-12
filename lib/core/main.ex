@@ -18,8 +18,6 @@ defmodule Bot.Core.Consumer do
 
   alias Bot.Core.CommandHandler
 
-  def start_link, do: Consumer.start_link(__MODULE__)
-
   def handle_event({:READY, _, _}), do: CommandHandler.register_commands()
   def handle_event({:INTERACTION_CREATE, intr, _}), do: CommandHandler.handle_command(intr)
   def handle_event(_), do: :ok
