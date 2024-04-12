@@ -1,9 +1,9 @@
 defmodule Bot.Core.CommandHandler do
   require Logger
 
-  alias Nosedrum.Interactor.Dispatcher
+  alias Nosedrum.Storage.Dispatcher
 
-  @server_id Application.get_env(:bot, :server_id)
+  @server_id Application.compile_env(:bot, :server_id)
   @cmd_root_path "Elixir.Bot.Commands"
   @plugin_filename "./command.list"
 

@@ -4,7 +4,7 @@ defmodule Bot.Core.Main do
   # Entry Point
   def start(_type, _args) do
     children = [
-      Nosedrum.Interactor.Dispatcher,
+      Nosedrum.Storage.Dispatcher,
       Bot.Core.Consumer
     ]
 
