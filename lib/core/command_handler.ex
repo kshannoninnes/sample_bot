@@ -3,7 +3,7 @@ defmodule Bot.Core.CommandHandler do
 
   alias Nosedrum.Storage.Dispatcher
 
-  @server_id Application.compile_env(:bot, :server_id)
+  @server_id Application.compile_env(:bot, :guild_id)
   @cmd_root_path "Elixir.Bot.Commands"
   @plugin_filename "./command.list"
 
