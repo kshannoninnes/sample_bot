@@ -1,7 +1,11 @@
 import Config
 
 config :bot,
-  guild_id: DISCORD_SERVER_ID_HERE
+  guild_ids: [
+    # One or more server ids, comma separated
+    # Leave empty to register commands globally
+    # Globally registered commands can take up to an hour to appear in a server
+  ]
 
 config :nostrum,
   token: "DISCORD_BOT_TOKEN_HERE"

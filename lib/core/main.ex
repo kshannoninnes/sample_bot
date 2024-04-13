@@ -4,7 +4,7 @@ defmodule Bot.Core.Main do
   # Entry Point
   def start(_type, _args) do
     children = [
-      Nosedrum.Interactor.Dispatcher,
+      Nosedrum.Storage.Dispatcher,
       Bot.Core.Consumer
     ]
 
@@ -17,8 +17,6 @@ defmodule Bot.Core.Consumer do
   use Nostrum.Consumer
 
   alias Bot.Core.CommandHandler
-
-  def start_link, do: Consumer.start_link(__MODULE__)
 
   def handle_event({:READY, _, _}), do: CommandHandler.register_commands()
   def handle_event({:INTERACTION_CREATE, intr, _}), do: CommandHandler.handle_command(intr)

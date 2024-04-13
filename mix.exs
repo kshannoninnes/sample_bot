@@ -4,8 +4,8 @@ defmodule Bot.MixProject do
   def project do
     [
       app: :bot,
-      version: "0.1.0",
-      elixir: "~> 1.12",
+      version: "0.2.0",
+      elixir: "~> 1.16",
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
@@ -22,8 +22,8 @@ defmodule Bot.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:nostrum, "~> 0.6.1"},
-      {:nosedrum, "~> 0.4"}
+      {:nostrum, "~> 0.8"},
+      {:nosedrum, "~> 0.6"}
     ]
   end
 end
