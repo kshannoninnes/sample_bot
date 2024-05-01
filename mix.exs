@@ -23,8 +23,7 @@ defmodule Bot.MixProject do
   defp deps do
     [
       {:nostrum, "~> 0.9"},
-      {:nosedrum, git: "https://github.com/jchristgit/nosedrum"},
-      {:xfile, "~> 0.4"}
+      {:nosedrum, git: "https://github.com/jchristgit/nosedrum"}
     ]
   end
 end
