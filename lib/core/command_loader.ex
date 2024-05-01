@@ -7,7 +7,6 @@ defmodule Bot.Core.CommandLoader do
   # and registered as a command via Nosedrum.Storage.Dispatcher
   def load_application_commands() do
     cmd_dir = "lib/commands"
-    Logger.debug("Loading application command files from #{cmd_dir}")
 
     command_modules =
       get_command_files(cmd_dir)
@@ -26,6 +25,7 @@ defmodule Bot.Core.CommandLoader do
   end
 
   defp get_command_files(cmd_dir) do
+    Logger.debug("Loading application command files from #{cmd_dir}")
     Path.absname(cmd_dir)
     |> Xfile.ls!(recursive: true, filter: &String.ends_with?(&1, ".ex"))
     |> Enum.to_list()
@@ -43,6 +43,7 @@ defmodule Bot.Core.CommandLoader do
 
         match ->
           module_name = List.flatten(match) |> List.first()
+          Logger.debug("Found command file #{module_name}")
           [module_name | acc]
       end
     end)
