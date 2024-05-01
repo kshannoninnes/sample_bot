@@ -25,8 +25,8 @@ defmodule Bot.Core.ApplicationCommandLoader do
   end
 
   defp filter_application_commands(command_list) do
-    Enum.filter(command_list, fn x ->
-      x.module_info(:attributes)[:behaviour]
+    Enum.filter(command_list, fn command ->
+      command.module_info(:attributes)[:behaviour]
       |> Enum.member?(Nosedrum.ApplicationCommand)
     end)
   end
