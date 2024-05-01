@@ -5,7 +5,7 @@ defmodule Bot.Core.Main do
   def start(_type, _args) do
     children = [
       Nosedrum.Storage.Dispatcher,
-      Bot.Core.CommandHandler
+      Bot.Core.ApplicationCommandLoader
     ]
 
     options = [strategy: :one_for_one, name: Bot.Supervisor]

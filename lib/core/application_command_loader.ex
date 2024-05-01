@@ -1,4 +1,4 @@
-defmodule Bot.Core.CommandLoader do
+defmodule Bot.Core.ApplicationCommandLoader do
   require Logger
 
   alias Nosedrum.Storage.Dispatcher
