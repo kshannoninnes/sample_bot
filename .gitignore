@@ -28,8 +28,5 @@ elixir_bot-*.tar
 # Configuration files for the ElixirLS vscode extension
 .elixir_ls/
 
-# Secrets files should never be included in vc
-/config/*.secret.exs
-
-# Production config file should be excluded to prevent potential leaks of discord key
-/config/config.exs
+# Production runtime.exs file
+/config/runtime.exs
