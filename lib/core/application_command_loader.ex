@@ -16,7 +16,7 @@ defmodule Bot.Core.ApplicationCommandLoader do
   defp get_all_command_modules() do
     # See: https://www.erlang.org/doc/man/code#all_available-0
     :code.all_available()
-    |> Enum.filter(fn {module, _, loaded} -> is_command?(module) and not loaded end)
+    |> Enum.filter(fn {module, _, _} -> is_command?(module) end)
     |> Enum.map(fn {module_charlist, _, _} -> List.to_existing_atom(module_charlist) end)
   end
 
