@@ -4,5 +4,5 @@
 
 ## Usage
 
-Clone to the location of your choice. Create a runtime.exs file inside /config using the example provided. Once you've filled in the bot token and the (optional) guild_id section, open a terminal, ensure you're inside the project directory, and run with `mix run --no-halt`
+Clone to the location of your choice. Create a runtime.exs file inside /config using the example provided. Once you've filled in the bot token and the (optional) guild_id section, open a terminal, ensure you're inside the project directory, and run with `iex -S mix`. While you're working on the bot, you can use the `recompile/0` function call within this iex environment to recompile your code without re-running your app entirely.
 
