@@ -3,8 +3,6 @@ defmodule Bot.Core.ApplicationCommandLoader do
 
   alias Nosedrum.Storage.Dispatcher
 
-  # Any module that implements Nosedrum.ApplicationCommand will be picked up
-  # and registered as a command via Nosedrum.Storage.Dispatcher
   def load_all() do
     get_all_command_modules()
     |> filter_application_commands()
@@ -25,10 +23,15 @@ defmodule Bot.Core.ApplicationCommandLoader do
     |> String.starts_with?("Elixir.Bot.Commands")
   end
 
+  # Filter out any module that doesn't implement the ApplicationCommand behaviour
   defp filter_application_commands(command_list) do
     Enum.filter(command_list, fn command ->
-      command.module_info(:attributes)[:behaviour]
-      |> Enum.member?(Nosedrum.ApplicationCommand)
+      case command.module_info(:attributes)[:behaviour] do
+        attr when is_list(attr) -> Enum.member?(attr, Nosedrum.ApplicationCommand)
+
+        # Skip because module doesn't implement ANY behaviour
+        nil -> false
+      end
     end)
   end
 
@@ -42,8 +45,15 @@ defmodule Bot.Core.ApplicationCommandLoader do
   defp register_commands() do
     Application.get_env(:bot, :guild_ids)
     |> Enum.each(fn server_id ->
-      Dispatcher.process_queue(server_id)
-      Logger.debug("Successfully registered application commands to #{server_id}")
+      case Dispatcher.process_queue(server_id) do
+        {:error, {:error, error}} ->
+          Logger.error(
+            "Error processing commands for server #{server_id}:\n #{inspect(error, pretty: true)}"
+          )
+
+        _ ->
+          Logger.debug("Successfully registered application commands to #{server_id}")
+      end
     end)
   end
 end
