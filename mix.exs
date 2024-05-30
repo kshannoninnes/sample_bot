@@ -22,7 +22,7 @@ defmodule Bot.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:nostrum, "~> 0.9"},
+      {:nostrum, "~> 0.9.1"},
       {:nosedrum, git: "https://github.com/jchristgit/nosedrum"}
     ]
   end
