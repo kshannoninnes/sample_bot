@@ -37,8 +37,8 @@ defmodule Bot.Core.ApplicationCommandLoader do
 
   defp queue_commands(commands) do
     Enum.each(commands, fn command ->
-      Dispatcher.queue_command(command.name, command)
-      Logger.debug("Added module #{command} as command /#{command.name}")
+      Dispatcher.queue_command(command.name(), command)
+      Logger.debug("Added module #{command} as command /#{command.name()}")
     end)
   end
 
