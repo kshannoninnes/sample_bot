@@ -8,7 +8,8 @@ defmodule Bot.Core.ApplicationCommandLoader do
     |> filter_application_commands()
     |> queue_commands()
 
-    register_commands()
+    Application.get_env(:bot, :guild_ids)
+    |> register_commands()
   end
 
   defp get_all_command_modules() do
@@ -42,18 +43,23 @@ defmodule Bot.Core.ApplicationCommandLoader do
     end)
   end
 
-  defp register_commands() do
-    Application.get_env(:bot, :guild_ids)
-    |> Enum.each(fn server_id ->
-      case Dispatcher.process_queue(server_id) do
-        {:error, {:error, error}} ->
-          Logger.error(
-            "Error processing commands for server #{server_id}:\n #{inspect(error, pretty: true)}"
-          )
+  defp register_commands([]), do: register_commands_with(:global)
 
-        _ ->
-          Logger.debug("Successfully registered application commands to #{server_id}")
-      end
+  defp register_commands(server_list) do
+    Enum.each(server_list, fn server_id ->
+      register_commands_with(server_id)
     end)
+  end
+
+  defp register_commands_with(server_id) do
+    case Dispatcher.process_queue(server_id) do
+      {:error, {:error, error}} ->
+        Logger.error(
+          "Error processing commands for server #{server_id}:\n #{inspect(error, pretty: true)}"
+        )
+
+      _ ->
+        Logger.debug("Successfully registered application commands to #{server_id}")
+    end
   end
 end
